@@ -6,7 +6,7 @@ import java.awt.event.WindowListener;
 public class Controller 
 {
 	private WelcomeView wv = new WelcomeView();
-	
+	//test
 	public Controller()
 	{
 	

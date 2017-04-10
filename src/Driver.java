@@ -6,5 +6,6 @@ public class Driver
 		Controller controller = new Controller();
 		controller.setWelcomeView(welcome);
 		controller.activateViews();
+		//delete this comment if you find it
 	}
 }

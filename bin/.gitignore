@@ -6,3 +6,5 @@
 /LoadingView.class
 /MainView.class
 /WelcomeView.class
+/Controller$LoadButtonListener.class
+/Controller$LoadingWindowListener.class

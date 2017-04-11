@@ -1,11 +1,14 @@
 public class Driver 
 {
-	//main does main stuff
+
 	public static void main(String[] args)
 	{
 		WelcomeView welcome = new WelcomeView();
+		LoadingView loading = new LoadingView();
 		Controller controller = new Controller();
 		controller.setWelcomeView(welcome);
-		controller.activateViews();
+		controller.setLoadingView(loading);
+		controller.activateWelcomeViews();
+		controller.activateLoadViews();
 	}
 }

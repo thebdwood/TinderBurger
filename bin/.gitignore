@@ -1,7 +1,8 @@
+/.idea/
 /Controller$StartButtonListener.class
 /Controller$WelcomeWindowListener.class
 /Controller.class
 /Driver.class
+/LoadingView.class
 /MainView.class
 /WelcomeView.class
-/LoadingView.class

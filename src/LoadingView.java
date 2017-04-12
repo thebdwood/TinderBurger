@@ -51,7 +51,7 @@ public class LoadingView extends JFrame
 		/*Moves the JPanel to the bottom*/
 		add(buttons, BorderLayout.SOUTH);
 		setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	
 	}
 	
 	public void addLoadButtonListener(ActionListener l)

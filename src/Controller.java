@@ -130,7 +130,8 @@ public class Controller
 		public void windowClosed(WindowEvent arg0)
 		{
 			/*Closes the program*/
-			System.exit(0);
+			//System.exit(0);
+			/*THIS IS WHERE A CANCEL LOADING SHOULD CALL APPROPRIATE METHODS */
 		}
 
 		@Override

@@ -34,8 +34,8 @@ public class LoadingView extends JFrame
 	public void activateView()
 	{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		double width = Math.round(screenSize.getWidth());
-		double height = Math.round(screenSize.getHeight());
+		double width = Math.round(screenSize.getWidth()/2);
+		double height = Math.round(screenSize.getHeight()/2);
 		/*JPanel to hold the start button*/
 		JPanel buttons = new JPanel();
 		/*Sets the startButton's size to the width of the frame and 20 percent of the height of the frame*/
@@ -51,7 +51,7 @@ public class LoadingView extends JFrame
 		/*Moves the JPanel to the bottom*/
 		add(buttons, BorderLayout.SOUTH);
 		setVisible(true);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 	}
 	
 	public void addLoadButtonListener(ActionListener l)

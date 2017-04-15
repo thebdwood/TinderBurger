@@ -1,6 +1,6 @@
+
 public class Driver 
 {
-
 	public static void main(String[] args)
 	{
 		WelcomeView welcome = new WelcomeView();
@@ -11,8 +11,6 @@ public class Driver
 		controller.setLoadingView(loading);
 		controller.activateWelcomeViews();
 		controller.setMainView(mv);
-//		controller.activateLoadViews();
-//		MainView test = new MainView();
-//		test.activateView();
+		
 	}
 }

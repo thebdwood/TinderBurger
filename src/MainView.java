@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -45,6 +46,10 @@ public class MainView extends JFrame
 	private JScrollPane noList;
 	private JScrollPane maybeList;
 	private JScrollPane yesList;
+	/*User options*/
+	private JButton resetButton;
+	private JButton foodButton;
+	private JButton helpButton;
 	/**
 	 * Constructor for MainView. Initializes the JScrollPanes and the DefaultListModels
 	 */
@@ -58,6 +63,11 @@ public class MainView extends JFrame
 		
 		yesListModel = new DefaultListModel<>();
 		yesList = new JScrollPane(new JList<Restaurant>(yesListModel));
+		
+		resetButton = new JButton("Reset");
+		foodButton = new JButton("Find me food");
+		helpButton = new JButton("Help");
+		
 	}
 	/**
 	 * Builds the view when called
@@ -69,10 +79,19 @@ public class MainView extends JFrame
 		double width = Math.round(screenSize.getWidth());
 		double height = Math.round(screenSize.getHeight());
 		
+		/*Panel to hold buttons*/
+		JPanel buttonPanel = new JPanel();
+		/*Layout for buttonPanel*/
+		GridLayout buttonPanelLayout = new GridLayout(1,3);
+		buttonPanelLayout.setHgap(10);
+		/*Add buttons*/
+		//buttonPanel.add(resetButton);
+		buttonPanel.add(helpButton);
+//		buttonPanel.add(helpButton);
 		/*Panel that holds the lists*/
 		JPanel listsPanel = new JPanel();
 		/*Layout for the listsPanel*/
-		GridLayout listsPanelLayout = new GridLayout(1, 3);
+		GridLayout listsPanelLayout = new GridLayout(2, 3);
 		listsPanelLayout.setHgap(10);
 		/*Sets the listsPanel's layout*/
 		listsPanel.setLayout(listsPanelLayout);
@@ -104,6 +123,9 @@ public class MainView extends JFrame
 		listsPanel.add(noList);
 		listsPanel.add(maybeList);
 		listsPanel.add(yesList);
+		listsPanel.add(new JPanel().add(resetButton));
+		listsPanel.add(new JPanel().add(foodButton));
+		listsPanel.add(buttonPanel);
 		
 		setSize((int) width, (int) height);
 		add(listsPanel, BorderLayout.SOUTH);
@@ -121,5 +143,10 @@ public class MainView extends JFrame
 		{
 			noListModel.addElement(r);
 		}
+	}
+	
+	public void addFoodButtonListener(ActionListener l)
+	{
+		foodButton.addActionListener(l);
 	}
 }

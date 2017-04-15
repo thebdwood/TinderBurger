@@ -17,7 +17,8 @@ public class Controller
 	public void setMainView(MainView mv)
 	{
 		this.mv = mv;
-		mv.setFocusable(false);
+		mv.addFoodButtonListener(new FoodButtonListener());
+		
 	}
 	
 	public void setWelcomeView(WelcomeView view)
@@ -40,6 +41,21 @@ public class Controller
 			/*Closes the window*/
 			mv.activateView();
 			wv.dispose();
+		}
+	}
+	
+	private class FoodButtonListener implements ActionListener
+	{
+		public FoodButtonListener()
+		{
+			
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			mv.dispose();
+			lv.activateView();
 		}
 	}
 	

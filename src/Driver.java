@@ -11,6 +11,5 @@ public class Driver
 		controller.setLoadingView(loading);
 		controller.activateWelcomeViews();
 		controller.setMainView(mv);
-		
 	}
 }

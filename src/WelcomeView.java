@@ -11,8 +11,8 @@ import javax.swing.border.EmptyBorder;
 
 public class WelcomeView extends JFrame
 {
-	JPanel glass = new JPanel();
-	JButton startButton = new JButton("Click Here Start");
+	JPanel glass;
+	JButton startButton;
 	
 	/**
 	 * 
@@ -21,7 +21,8 @@ public class WelcomeView extends JFrame
 
 	public WelcomeView()
 	{
-		
+		glass = new JPanel();
+		startButton = new JButton("Click Here Start");
 	}
 	
 	public void activateView()

@@ -7,10 +7,17 @@ public class Controller
 {
 	private WelcomeView wv = new WelcomeView();
 	private LoadingView lv = new LoadingView();
+	private MainView mv = new MainView();
 
 	public Controller()
 	{
 	
+	}
+	
+	public void setMainView(MainView mv)
+	{
+		this.mv = mv;
+		mv.setFocusable(false);
 	}
 	
 	public void setWelcomeView(WelcomeView view)
@@ -31,6 +38,7 @@ public class Controller
 		public void actionPerformed(ActionEvent arg0) 
 		{
 			/*Closes the window*/
+			mv.activateView();
 			wv.dispose();
 		}
 	}
@@ -52,7 +60,7 @@ public class Controller
 		public void windowClosed(WindowEvent arg0)
 		{
 			/*Closes the program*/
-			System.exit(0);
+			//System.exit(0);
 		}
 
 		@Override

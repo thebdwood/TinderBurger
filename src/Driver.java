@@ -6,9 +6,13 @@ public class Driver
 		WelcomeView welcome = new WelcomeView();
 		LoadingView loading = new LoadingView();
 		Controller controller = new Controller();
+		MainView mv = new MainView();
 		controller.setWelcomeView(welcome);
 		controller.setLoadingView(loading);
 		controller.activateWelcomeViews();
-		controller.activateLoadViews();
+		controller.setMainView(mv);
+//		controller.activateLoadViews();
+//		MainView test = new MainView();
+//		test.activateView();
 	}
 }

@@ -11,7 +11,7 @@ public class Driver
 		controller.setLoadingView(loading);
 		controller.activateWelcomeViews();
 		controller.setMainView(mv);
-//		controller.activateLoadViews();
+		controller.activateLoadViews();
 //		MainView test = new MainView();
 //		test.activateView();
 	}

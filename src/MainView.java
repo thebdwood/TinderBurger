@@ -14,6 +14,8 @@ import javax.swing.border.TitledBorder;
 /**
  * The main view for the user interface. Allows drag and drop features and displays changes to user.
  * @author amorr
+ * @author thebdwood
+ * thebdwood: only graphic and color adjustment. Majority of code contribution from amorr.
  *
  */
 public class MainView extends JFrame
@@ -54,7 +56,7 @@ public class MainView extends JFrame
 	 * Constructor for MainView. Initializes the JScrollPanes and the DefaultListModels
 	 */
 	public MainView()
-	{
+	{	
 		noListModel = new DefaultListModel<>();
 		noList = new JScrollPane(new JList<Restaurant>(noListModel));
 		

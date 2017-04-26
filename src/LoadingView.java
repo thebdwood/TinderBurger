@@ -68,6 +68,7 @@ public class LoadingView extends JFrame
 				loadingWidth, loadingHeight, Image.SCALE_DEFAULT));
 		/*Add the loading gif to center of the panel*/
 		add(new JLabel(loadingGif, JLabel.CENTER));
+		setLocationRelativeTo(null);
 		setVisible(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	
 	}

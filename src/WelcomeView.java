@@ -39,7 +39,8 @@ public class WelcomeView extends JFrame
 		 * Broken code. Can't get the button color to change.
 		startButton.setOpaque(true);
 		startButton.setBackground(welcomeButtonBackground);
-		*/
+		
+
 		/*Sets entire screen background to welcomeFrameBackground red*/
 		buttons.setBackground(welcomeFrameBackground);
 		/*Add to panel*/

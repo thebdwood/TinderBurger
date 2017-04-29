@@ -3,6 +3,7 @@ public class Driver
 {
 	public static void main(String[] args)
 	{
+
 		WelcomeView welcome = new WelcomeView();
 		LoadingView loading = new LoadingView();
 		Controller controller = new Controller();
@@ -11,5 +12,6 @@ public class Driver
 		controller.setLoadingView(loading);
 		controller.activateWelcomeViews();
 		controller.setMainView(mv);
+
 	}
 }

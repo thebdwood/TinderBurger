@@ -1,7 +1,9 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
@@ -85,6 +87,8 @@ public class MainView extends JFrame
 		JPanel buttonPanel = new JPanel();
 		/*Layout for buttonPanel*/
 		GridLayout buttonPanelLayout = new GridLayout(1,3);
+		GridBagLayout t = new GridBagLayout();
+		
 		buttonPanelLayout.setHgap(10);
 		/*Add buttons*/
 		//buttonPanel.add(resetButton);
@@ -93,7 +97,7 @@ public class MainView extends JFrame
 		/*Panel that holds the lists*/
 		JPanel listsPanel = new JPanel();
 		/*Layout for the listsPanel*/
-		GridLayout listsPanelLayout = new GridLayout(2, 3);
+		GridLayout listsPanelLayout = new GridLayout(1, 3);
 		listsPanelLayout.setHgap(10);
 		/*Sets the listsPanel's layout*/
 		listsPanel.setLayout(listsPanelLayout);
@@ -125,11 +129,11 @@ public class MainView extends JFrame
 		listsPanel.add(noList);
 		listsPanel.add(maybeList);
 		listsPanel.add(yesList);
-		listsPanel.add(new JPanel().add(resetButton));
-		listsPanel.add(new JPanel().add(foodButton));
-		listsPanel.add(buttonPanel);
-		
+//		listsPanel.add(new JPanel().add(resetButton));
+//		listsPanel.add(new JPanel().add(foodButton));
+//		listsPanel.add(buttonPanel);
 		setSize((int) width, (int) height);
+		
 		add(listsPanel, BorderLayout.SOUTH);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	

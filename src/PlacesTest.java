@@ -28,20 +28,29 @@ public class PlacesTest {
 	}
 
 	public static void main(String[] args){
-		GooglePlaces client = new GooglePlaces(API_KEY);
-		List<Place> places = new ArrayList<>(new ArrayList<Place>(client.getNearbyPlaces(35.2124253,-97.4219124, 6000, GooglePlaces.MAXIMUM_RESULTS,  Param.name("keyword").value("tacos"))));
-		Map<String, Place> placesMap = new LinkedHashMap<>(places.size());
+		String[] yesList = {"burgers", "tacos"};
+		String[] noList = {"noodles"};
+		Locator l = new Locator(yesList,noList);
+		Map<String,Place> placesMap = l.getResults();
 		int i = 0;
-		for (Place place : places){
-				if (place.getDetails().getRating() > 4.0)
-					if (!placesMap.containsKey(place.getName()))
-						placesMap.put(place.getName(), place);
-		}
-		i = 0;
 		for (String s : placesMap.keySet()){
-			if (i < (placesMap.size() / 3 + 1))
-				System.out.println(++i + ": " + s);
+			System.out.println(++i + ": " + s);
 		}
+		
+//		GooglePlaces client = new GooglePlaces(API_KEY);
+//		List<Place> places = new ArrayList<>(new ArrayList<Place>(client.getNearbyPlaces(35.2124253,-97.4219124, 6000, GooglePlaces.MAXIMUM_RESULTS,  Param.name("keyword").value("tacos"))));
+//		Map<String, Place> placesMap = new LinkedHashMap<>(places.size());
+//		int i = 0;
+//		for (Place place : places){
+//				if (place.getDetails().getRating() > 4.0)
+//					if (!placesMap.containsKey(place.getName()))
+//						placesMap.put(place.getName(), place);
+//		}
+//		i = 0;
+//		for (String s : placesMap.keySet()){
+//			if (i < (placesMap.size() / 3 + 1))
+//				System.out.println(++i + ": " + s);
+//		}
 //		
 //		for (Place p : placesMap.values()){
 //			

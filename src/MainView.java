@@ -249,9 +249,53 @@ public class MainView extends JFrame
 			noListModel.addElement(r);
 		}
 	}
-	
+
+	/**
+	 * Add action listener for foodButton
+	 * @param l
+	 */
 	public void addFoodButtonListener(ActionListener l)
 	{
 		foodButton.addActionListener(l);
+	}
+	/**
+	 * Add action listener for yesButton
+	 * @param l
+	 */
+	public void addYesButtonListener(ActionListener l)
+	{
+		yesButton.addActionListener(l);
+	}
+	/**
+	 * Add action listener for noButton
+	 * @param l
+	 */
+	public void addNoButtonListener(ActionListener l)
+	{
+		noButton.addActionListener(l);
+	}
+	/**
+	 * Add action listener for maybeButton
+	 * @param l
+	 */
+	public void addMaybeButtonListener(ActionListener l)
+	{
+		maybeButton.addActionListener(l);
+	}
+	/**
+	 * Add action listener for resetButton
+	 * @param l
+	 */
+	public void addResetButtonListener(ActionListener l)
+	{
+		resetButton.addActionListener(l);
+	}
+	/**
+	 * Add action listener for helpButton
+	 * @param l
+	 */
+	public void addHelpButtonListener(ActionListener l)
+	{
+		helpButton.addActionListener(l);
 	}
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /.idea/
 /Controller$StartButtonListener.class
 /Controller$WelcomeWindowListener.class
@@ -10,3 +11,8 @@
 /Controller$LoadingWindowListener.class
 /Restaurant.class
 /Controller$FoodButtonListener.class
+=======
+/Locator.class
+/Foods.class
+/Ethnicities.class
+>>>>>>> kellan

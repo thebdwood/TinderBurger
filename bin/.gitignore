@@ -1,11 +1,3 @@
-/.idea/
-/Controller$StartButtonListener.class
-/Controller$WelcomeWindowListener.class
-/Controller.class
-/Driver.class
-/LoadingView.class
-/MainView.class
-/WelcomeView.class
-/Controller$LoadButtonListener.class
-/Controller$LoadingWindowListener.class
-/Restaurant.class
+/Locator.class
+/Foods.class
+/Ethnicities.class

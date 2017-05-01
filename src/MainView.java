@@ -3,8 +3,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -51,9 +53,15 @@ public class MainView extends JFrame
 	private JScrollPane maybeList;
 	private JScrollPane yesList;
 	/*User options*/
+	private JButton yesButton;
+	private JButton noButton;
+	private JButton maybeButton;
 	private JButton resetButton;
 	private JButton foodButton;
 	private JButton helpButton;
+	private JPanel leftHelpPanel;
+	private JPanel displayPanel;
+	private JPanel rightHelpPanel;
 	/**
 	 * Constructor for MainView. Initializes the JScrollPanes and the DefaultListModels
 	 */
@@ -68,9 +76,17 @@ public class MainView extends JFrame
 		yesListModel = new DefaultListModel<>();
 		yesList = new JScrollPane(new JList<Restaurant>(yesListModel));
 		
+		yesButton = new JButton(YES_LIST_TITLE);
+		maybeButton = new JButton(MAYBE_LIST_TITLE);
+		noButton = new JButton(NO_LIST_TITLE);
+		
 		resetButton = new JButton("Reset");
 		foodButton = new JButton("Find me food");
 		helpButton = new JButton("Help");
+		
+		leftHelpPanel = new JPanel();
+		rightHelpPanel = new JPanel();
+		displayPanel = new JPanel();
 		
 	}
 	/**
@@ -82,29 +98,86 @@ public class MainView extends JFrame
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		double width = Math.round(screenSize.getWidth());
 		double height = Math.round(screenSize.getHeight());
-		
-		/*Panel to hold buttons*/
-		JPanel buttonPanel = new JPanel();
-		/*Layout for buttonPanel*/
-		GridLayout buttonPanelLayout = new GridLayout(1,3);
-		GridBagLayout t = new GridBagLayout();
-		
-		buttonPanelLayout.setHgap(10);
-		/*Add buttons*/
-		//buttonPanel.add(resetButton);
-		buttonPanel.add(helpButton);
-//		buttonPanel.add(helpButton);
-		/*Panel that holds the lists*/
-		JPanel listsPanel = new JPanel();
-		/*Layout for the listsPanel*/
-		GridLayout listsPanelLayout = new GridLayout(1, 3);
-		listsPanelLayout.setHgap(10);
-		/*Sets the listsPanel's layout*/
-		listsPanel.setLayout(listsPanelLayout);
-		/*Creates padding around the JPanel*/
-		listsPanel.setBorder(new EmptyBorder(0, (int) (width * .05), (int) (height * .05), (int) (width * .05)));
-		listsPanel.setPreferredSize(new Dimension((int) (width * .40), (int) (height*.40)));
-		
+		setSize((int) width, (int) height);
+		setLayout(new GridBagLayout());
+		/*A row for the JFrame*/
+		JPanel rowPanel = new JPanel();
+		/*GridBag constraints to organize the rows of the frame*/
+		GridBagConstraints rowConstraints = new GridBagConstraints();
+		rowConstraints.insets = new Insets(4, 4, 4, 4);
+		rowConstraints.gridx = 0;
+		rowConstraints.weightx = 1;
+		rowConstraints.weighty = 1;
+        rowConstraints.gridy = 0;
+        rowConstraints.fill = GridBagConstraints.BOTH;
+        rowConstraints.anchor = GridBagConstraints.NORTH;
+        /*Constraints for the panels that will hold the choices and help info*/
+        GridBagConstraints panelConstraints = new GridBagConstraints();
+        panelConstraints.fill = GridBagConstraints.BOTH;
+        panelConstraints.weighty = 1;
+        //TODO: temp colors. Delete when done
+        leftHelpPanel.setBackground(Color.BLUE);
+        rightHelpPanel.setBackground(Color.RED);
+        displayPanel.setBackground(Color.CYAN);
+        /*Creates a GridBagLayout for the first row panel*/
+        rowPanel.setLayout(new GridBagLayout());
+        /*Adds the panels for choices and help info*/
+        rowPanel.add(leftHelpPanel, panelConstraints);
+        rowPanel.add(displayPanel, panelConstraints);
+        rowPanel.add(rightHelpPanel, panelConstraints);
+        /*Sets the buttons titles*/
+        noButton.setFont(new Font(NO_LIST_TITLE, Font.BOLD, new Double(width*.025).intValue()));
+        maybeButton.setFont(new Font(MAYBE_LIST_TITLE, Font.BOLD, new Double(width*.025).intValue()));
+        yesButton.setFont(new Font(YES_LIST_TITLE, Font.BOLD, new Double(width*.025).intValue()));
+        /*Constraints to organize the no button*/
+        GridBagConstraints optionButtonConstraints = new GridBagConstraints();
+        optionButtonConstraints.fill = GridBagConstraints.BOTH;
+        optionButtonConstraints.weightx = 1;
+        optionButtonConstraints.gridx = 0;
+        optionButtonConstraints.insets = new Insets(1,1,1,1);
+        optionButtonConstraints.gridy = -1;
+        /*Makes sure that the no button is the same size as the yes button. The yes button is the widest button based on the text we have on it*/
+        optionButtonConstraints.ipadx = new Double(yesButton.getPreferredSize().getWidth()- noButton.getPreferredSize().getWidth()).intValue();  //fix hard coding if time allows
+        /*Adds no button with constraints*/
+        rowPanel.add(noButton, optionButtonConstraints);
+        optionButtonConstraints.gridx ++;
+        int currentx = optionButtonConstraints.gridx;
+        /*Constraints for maybe button*/
+        optionButtonConstraints = new GridBagConstraints();
+        optionButtonConstraints.fill = GridBagConstraints.BOTH;
+        optionButtonConstraints.weightx = 1;
+        optionButtonConstraints.gridx = currentx;
+        optionButtonConstraints.insets = new Insets(1,1,1,1);
+        /*Ensures that maybe is the same width and height as other buttons*/
+        optionButtonConstraints.ipadx = new Double(yesButton.getPreferredSize().getWidth()- maybeButton.getPreferredSize().getWidth()).intValue();  //fix hard coding if time allows
+        optionButtonConstraints.ipady = new Double(noButton.getPreferredSize().getHeight()- maybeButton.getPreferredSize().getHeight()).intValue();  //fix hard coding if time allows
+        /*Adds maybe button with given constraints*/
+        rowPanel.add(maybeButton, optionButtonConstraints);
+        optionButtonConstraints.gridx ++;
+        currentx = optionButtonConstraints.gridx;
+        /*Constraints for yes button*/
+        optionButtonConstraints = new GridBagConstraints();
+        optionButtonConstraints.fill = GridBagConstraints.BOTH;
+        optionButtonConstraints.weightx = 1;
+        optionButtonConstraints.gridx = currentx;
+        optionButtonConstraints.insets = new Insets(1,1,1,1);
+        /*Ensures button is the same height as the others*/
+        optionButtonConstraints.ipady = new Double(noButton.getPreferredSize().getHeight()- yesButton.getPreferredSize().getHeight()).intValue();  //fix hard coding if time allows
+        /*Adds the yes button with constraints*/
+        rowPanel.add(yesButton, optionButtonConstraints);
+        /*Adds rowPanel to the frame*/
+        add(rowPanel, rowConstraints);
+        rowConstraints.gridy++;
+        /*New row panel needed for next row*/
+        rowPanel = new JPanel();
+        /*Constraints for the lists*/
+        GridBagConstraints listConstraints = new GridBagConstraints();
+        listConstraints.fill = GridBagConstraints.BOTH;
+        listConstraints.weightx = 1;
+        listConstraints.weighty = 1;
+        /*Set row layout to GridBagLayout*/
+        rowPanel.setLayout(new GridBagLayout());
+        /*Create the lists borders*/
 		TitledBorder noListTitleBorder = new TitledBorder(new LineBorder(Color.BLACK, 1));
 		noListTitleBorder.setTitle(NO_LIST_TITLE);
 		noListTitleBorder.setTitleFont(new Font(NO_LIST_TITLE, Font.BOLD, FONT_LIST_TITLE_SIZES));
@@ -125,17 +198,43 @@ public class MainView extends JFrame
 		yesListTitleBorder.setTitleJustification(TitledBorder.CENTER);
 		
 		yesList.setBorder(yesListTitleBorder);
-		
-		listsPanel.add(noList);
-		listsPanel.add(maybeList);
-		listsPanel.add(yesList);
-//		listsPanel.add(new JPanel().add(resetButton));
-//		listsPanel.add(new JPanel().add(foodButton));
-//		listsPanel.add(buttonPanel);
-		setSize((int) width, (int) height);
-		
-		add(listsPanel, BorderLayout.SOUTH);
+		/*Add lists to panel*/
+		rowPanel.add(noList, listConstraints);
+		rowPanel.add(maybeList, listConstraints);
+		rowPanel.add(yesList, listConstraints);
+		/*Adds row to the frame*/
+        add(rowPanel, rowConstraints);
+        rowConstraints.gridy++;
+        /*New row needed*/
+        rowPanel = new JPanel();
+        /*Set row layout to GridBag*/
+        rowPanel.setLayout(new GridBagLayout());
+        /*Constraints to organize last row of buttons*/
+        GridBagConstraints c = new GridBagConstraints();
+        c.anchor = GridBagConstraints.SOUTHWEST;
+        c.weightx = 1;
+        c.weighty = 1;
+        /*Invisible button for organization*/
+        JButton spacer = new JButton();
+        spacer.setVisible(false);
+        /*Add the reset button with invisible button and the food button*/
+        rowPanel.add(resetButton, c);
+        rowPanel.add(spacer, c);
+        rowPanel.add(foodButton, c);
+        /*New constraints are needed to place help button in the correct spot*/
+        c = new GridBagConstraints();
+        c.anchor = GridBagConstraints.SOUTHWEST;
+        rowPanel.add(helpButton, c);
+        /*Adjusted constraints for the final row*/
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.SOUTH;
+        c.gridy = rowConstraints.gridy;
+        /*Adds the row with the updated constraints*/
+        add(rowPanel, c);
+
 		setVisible(true);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	
 	}
 	/**

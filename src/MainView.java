@@ -114,7 +114,7 @@ public class MainView extends JFrame
         panelConstraints.weighty = 1;
         //TODO: temp colors. Delete when done
         leftHelpPanel.setBackground(Color.BLUE);
-        displayPanel.setBackground(Color.CYAN);
+        
         /*Set size of button, text, and gives appearance of label*/
         remaining.setFont(new Font("", Font.BOLD, new Double(width * .025).intValue()));
         remaining.setPreferredSize(new Dimension(new Double(width*.05).intValue(),new Double(height*.05).intValue()));
@@ -133,6 +133,8 @@ public class MainView extends JFrame
         rightHelpPanel.add(remaining, counterConstraint);
         /*Creates a GridBagLayout for the first row panel*/
         rowPanel.setLayout(new GridBagLayout());
+        
+        displayPanel.add(new JButton(Ethnicities.American.toString()));
         /*Adds the panels for choices and help info*/
         rowPanel.add(leftHelpPanel, panelConstraints);
         rowPanel.add(displayPanel, panelConstraints);

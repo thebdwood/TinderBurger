@@ -77,9 +77,24 @@ public class Locator {
 		for(String arg : yes){
 			places = client.getNearbyPlaces(35.2124253,-97.4219124, 6000, GooglePlaces.MAXIMUM_RESULTS,  Param.name("keyword").value(arg));
 			for (Place place : places){
-//				if (place.getDetails().getRating() > 4.0)			// disable for considerable run-time improvement
 					if (!placesMap.containsKey(place.getName()))
 						placesMap.put(place.getName(), place);
+			}
+		}
+		
+		for (String arg: maybe){
+			places = client.getNearbyPlaces(35.2124253,-97.4219124, 6000, GooglePlaces.MAXIMUM_RESULTS,  Param.name("keyword").value(arg));
+			for (Place place : places){
+					if (!placesMap.containsKey(place.getName()))
+						placesMap.put(place.getName(), place);
+			}
+		}
+		
+		for (String arg: no){
+			places = client.getNearbyPlaces(35.2124253,-97.4219124, 6000, GooglePlaces.MAXIMUM_RESULTS,  Param.name("keyword").value(arg));
+			for (Place place : places){
+					if (!placesMap.containsKey(place.getName()))
+						placesMap.remove(place.getName());
 			}
 		}
 

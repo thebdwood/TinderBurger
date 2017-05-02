@@ -55,10 +55,13 @@ public class MainView extends JFrame
 	private JButton foodButton;
 	private JButton helpButton;
 	ImageIcon helpBtn = new ImageIcon("helpButton.png");
+	ImageIcon foodBtnImg = new ImageIcon("foodButton.png");
 	private JPanel leftHelpPanel;
 	private JPanel displayPanel;
 	private JPanel rightHelpPanel;
 	private JButton remaining;
+	
+	public Color mainFrameBackground = Color.decode("#7FDBFF");
 	/**
 	 * Constructor for MainView. Initializes the JScrollPanes and the DefaultListModels
 	 */
@@ -78,7 +81,7 @@ public class MainView extends JFrame
 		noButton = new JButton(NO_LIST_TITLE);
 		
 		resetButton = new JButton("Reset");
-		foodButton = new JButton("Find me food");
+		foodButton = new JButton("");
 		helpButton = new JButton("");
 		helpButton.setIcon(helpBtn); 
 		
@@ -226,6 +229,7 @@ public class MainView extends JFrame
         /*Constraints to organize last row of buttons*/
         GridBagConstraints c = new GridBagConstraints();
         c.anchor = GridBagConstraints.SOUTHWEST;
+        c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 1;
         c.weighty = 1;
         /*Invisible button for organization*/
@@ -234,6 +238,10 @@ public class MainView extends JFrame
         /*Add the reset button with invisible button and the food button*/
         rowPanel.add(resetButton, c);
         rowPanel.add(spacer, c);
+		foodButton.setIcon(foodBtnImg);
+		foodButton.setBackground(mainFrameBackground);
+		foodButton.setOpaque(true);
+		foodButton.setBorderPainted(false);
         rowPanel.add(foodButton, c);
         /*New constraints are needed to place help button in the correct spot*/
         c = new GridBagConstraints();

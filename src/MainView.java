@@ -1,20 +1,15 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-
 /**
  * The main view for the user interface. Allows drag and drop features and displays changes to user.
  * @author amorr
@@ -62,6 +57,7 @@ public class MainView extends JFrame
 	private JPanel leftHelpPanel;
 	private JPanel displayPanel;
 	private JPanel rightHelpPanel;
+	private JButton remaining;
 	/**
 	 * Constructor for MainView. Initializes the JScrollPanes and the DefaultListModels
 	 */
@@ -87,7 +83,8 @@ public class MainView extends JFrame
 		leftHelpPanel = new JPanel();
 		rightHelpPanel = new JPanel();
 		displayPanel = new JPanel();
-		
+	
+		remaining = new JButton("Remaining: 0");
 	}
 	/**
 	 * Builds the view when called
@@ -117,8 +114,23 @@ public class MainView extends JFrame
         panelConstraints.weighty = 1;
         //TODO: temp colors. Delete when done
         leftHelpPanel.setBackground(Color.BLUE);
-        rightHelpPanel.setBackground(Color.RED);
         displayPanel.setBackground(Color.CYAN);
+        /*Set size of button, text, and gives appearance of label*/
+        remaining.setFont(new Font("", Font.BOLD, new Double(width * .025).intValue()));
+        remaining.setPreferredSize(new Dimension(new Double(width*.05).intValue(),new Double(height*.05).intValue()));
+        remaining.setFocusable(false);
+        remaining.setBorder(null);
+        remaining.setEnabled(false);
+        /*New GridBagLayout*/
+        rightHelpPanel.setLayout(new GridBagLayout());
+        /*Constraints for right help panel*/
+        GridBagConstraints counterConstraint = new GridBagConstraints();
+        counterConstraint.anchor = GridBagConstraints.NORTHWEST;
+        counterConstraint.weightx = 1;
+        counterConstraint.weighty = 1;
+        counterConstraint.fill = GridBagConstraints.HORIZONTAL;
+        /*Adds remaining to panel*/
+        rightHelpPanel.add(remaining, counterConstraint);
         /*Creates a GridBagLayout for the first row panel*/
         rowPanel.setLayout(new GridBagLayout());
         /*Adds the panels for choices and help info*/

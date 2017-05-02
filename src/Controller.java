@@ -54,7 +54,7 @@ public class Controller
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			mv.dispose();
+			mv.setVisible(false);
 			lv.activateView();
 		}
 	}

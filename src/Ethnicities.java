@@ -9,7 +9,7 @@ public enum Ethnicities {
 	Japanese,
 	German,
 	Indian,
-	Mexican,
+	Hispanic,
 	Italian,
 	American,
 	Greek,

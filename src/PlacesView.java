@@ -96,7 +96,7 @@ public class PlacesView extends JFrame{
 		//used for filling the scroll pane for testing
 		int i = 0;
 		while (++i < 20){
-			placesModel.addElement(i + ": TSESSADSsdghdfgfgkghjl");
+			placesModel.addElement(i + ": Qudoba is great fam");
 		}
 
 		setSize((int) width, (int) height);

@@ -8,6 +8,7 @@ public class Controller
 	private WelcomeView wv = new WelcomeView();
 	private LoadingView lv = new LoadingView();
 	private MainView mv = new MainView();
+	private PlacesView pv = new PlacesView();
 
 	public Controller()
 	{
@@ -54,8 +55,20 @@ public class Controller
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			mv.setVisible(false);
 			lv.activateView();
+			/* timer set to allow loading while LoadView is operational */
+			new java.util.Timer().schedule( 
+			        new java.util.TimerTask() {
+			            @Override
+			            public void run() {
+			                mv.setVisible(false);
+			            	pv.activatePlacesView();
+			            	lv.dispose();
+			            }
+			        }, 
+			        5000 
+			);
+
 		}
 	}
 	
@@ -156,7 +169,7 @@ public class Controller
 			/*Closes the program*/
 			//System.exit(0);
 			/* THIS IS WHERE A CANCEL LOADING SHOULD CALL APPROPRIATE METHODS */
-			mv.activateView();
+			//mv.activateView();
 		}
 
 		@Override

@@ -9,7 +9,7 @@ public enum Ethnicities {
 	Japanese,
 	German,
 	Indian,
-	Mexican,
+	Hispanic,
 	Italian,
 	American,
 	Greek,
@@ -19,7 +19,7 @@ public enum Ethnicities {
 	private final String text;
 
 	private Ethnicities(){
-		this.text = "";
+		this.text = "food";
 	}
 
 	private Ethnicities(final String text){
@@ -32,8 +32,8 @@ public enum Ethnicities {
 
 	@Override
 	public String toString() {
-		if (this.getText().equals(""))
-			return this.name();
+		if (this.getText().equals("food"))
+			return this.name() + " " + text;
 		else
 			return text;
 	}

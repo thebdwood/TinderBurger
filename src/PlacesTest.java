@@ -28,14 +28,16 @@ public class PlacesTest {
 	}
 
 	public static void main(String[] args){
-		String[] yesList = {"burgers", "tacos"};
-		String[] noList = {"noodles"};
-		Locator l = new Locator(yesList,noList);
-		Map<String,Place> placesMap = l.getResults();
-		int i = 0;
-		for (String s : placesMap.keySet()){
-			System.out.println(++i + ": " + s);
-		}
+//		String[] yesList = {"Hispanic"};
+//		String[] noList = {"noodles"};
+//		Locator l = new Locator(yesList,noList);
+//		Map<String,Place> placesMap = l.getResults();
+//		int i = 0;
+//		for (String s : placesMap.keySet()){
+//			System.out.println(++i + ": " + s);
+//		}
+		PlacesView pv = new PlacesView();
+		pv.activatePlacesView();
 		
 //		GooglePlaces client = new GooglePlaces(API_KEY);
 //		List<Place> places = new ArrayList<>(new ArrayList<Place>(client.getNearbyPlaces(35.2124253,-97.4219124, 6000, GooglePlaces.MAXIMUM_RESULTS,  Param.name("keyword").value("tacos"))));

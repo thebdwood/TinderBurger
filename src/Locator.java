@@ -12,7 +12,7 @@ public class Locator {
 	private static final String API_KEY = "AIzaSyDjSIBUt0_d15vAulaS8eGHNdAOUaBY2k0";
 	private static final GooglePlaces client = new GooglePlaces(API_KEY);
 	private List<Place> places = new ArrayList<>(60);
-	private Map<String, Place> placesMap = new HashMap<>(60);
+	private Map<String, Restaurant> placesMap = new HashMap<>(60);
 
 	public Locator(){
 
@@ -21,18 +21,12 @@ public class Locator {
 	/**
 	 * Constructor for a Locator with a variable number of String args.
 	 * These args should be the keywords to search locations for.
+	 * They may also be passed as an array of Strings.
 	 * For example, one might search for "burgers" and "tacos"
 	 * @param args
 	 */
 	public Locator(String... args){
-		for(String arg : args){
-			places = client.getNearbyPlaces(35.2124253,-97.4219124, 6000, GooglePlaces.MAXIMUM_RESULTS,  Param.name("keyword").value(arg));
-			for (Place place : places){
-//				if (place.getDetails().getRating() > 4.0)			// disabled for considerable run-time improvement
-					if (!placesMap.containsKey(place.getName()))
-						placesMap.put(place.getName(), place);
-			}
-		}
+		this(args,new String[] {""});
 	}
 
 	/**
@@ -45,24 +39,9 @@ public class Locator {
 	 * @param no	String array of food type keywords
 	 */
 	public Locator(String[] yes, String[] no){
-		for(String arg : yes){
-			places = client.getNearbyPlaces(35.2124253,-97.4219124, 6000, GooglePlaces.MAXIMUM_RESULTS,  Param.name("keyword").value(arg));
-			for (Place place : places){
-//				if (place.getDetails().getRating() > 4.0)			// disable for considerable run-time improvement
-					if (!placesMap.containsKey(place.getName()))
-						placesMap.put(place.getName(), place);
-			}
-		}
-		for (String arg: no){
-			places = client.getNearbyPlaces(35.2124253,-97.4219124, 6000, GooglePlaces.MAXIMUM_RESULTS,  Param.name("keyword").value(arg));
-			for (Place place : places){
-//				if (place.getDetails().getRating() > 4.0)			// disable for considerable run-time improvement
-					if (!placesMap.containsKey(place.getName()))
-						placesMap.remove(place.getName());
-			}
-		}
+		this(yes, new String[]{""}, no);
 	}
-	
+
 	/**
 	 * Constructor for a Locator taking three String arrays: yes, maybe and no,
 	 * which should represent the types of food corresponding to those selections.
@@ -76,31 +55,36 @@ public class Locator {
 	public Locator(String[] yes, String[] maybe, String[] no){
 		for(String arg : yes){
 			places = client.getNearbyPlaces(35.2124253,-97.4219124, 6000, GooglePlaces.MAXIMUM_RESULTS,  Param.name("keyword").value(arg));
-			for (Place place : places){
-					if (!placesMap.containsKey(place.getName()))
-						placesMap.put(place.getName(), place);
+			
+			for (int i = 0; i < (places.size()/3) + 1; ++i){
+				if (!placesMap.containsKey(places.get(i).getName())){
+					placesMap.put(places.get(i).getName(), new Restaurant(places.get(i)));
+					placesMap.get(places.get(i).getName()).addKeyword(arg);
+				}
 			}
+		
 		}
 		
 		for (String arg: maybe){
 			places = client.getNearbyPlaces(35.2124253,-97.4219124, 6000, GooglePlaces.MAXIMUM_RESULTS,  Param.name("keyword").value(arg));
-			for (Place place : places){
-					if (!placesMap.containsKey(place.getName()))
-						placesMap.put(place.getName(), place);
+			for (int i = 0; i < (places.size()/3) + 1; ++i){
+				if (!placesMap.containsKey(places.get(i).getName())){
+					placesMap.put(places.get(i).getName(), new Restaurant(places.get(i)));
+					placesMap.get(places.get(i).getName()).addKeyword(arg);
+				}
 			}
 		}
 		
 		for (String arg: no){
 			places = client.getNearbyPlaces(35.2124253,-97.4219124, 6000, GooglePlaces.MAXIMUM_RESULTS,  Param.name("keyword").value(arg));
 			for (Place place : places){
-					if (!placesMap.containsKey(place.getName()))
-						placesMap.remove(place.getName());
+				if (placesMap.containsKey(place.getName()))
+					placesMap.remove(place.getName());
 			}
 		}
-
 	}
-	
-	public Map<String, Place> getResults(){
+
+	public Map<String, Restaurant> getResults(){
 		return placesMap;
 	}
 

@@ -54,6 +54,7 @@ public class MainView extends JFrame
 	private JButton resetButton;
 	private JButton foodButton;
 	private JButton helpButton;
+	ImageIcon helpBtn = new ImageIcon("helpButton.png");
 	private JPanel leftHelpPanel;
 	private JPanel displayPanel;
 	private JPanel rightHelpPanel;
@@ -78,7 +79,8 @@ public class MainView extends JFrame
 		
 		resetButton = new JButton("Reset");
 		foodButton = new JButton("Find me food");
-		helpButton = new JButton("Help");
+		helpButton = new JButton("");
+		helpButton.setIcon(helpBtn); 
 		
 		leftHelpPanel = new JPanel();
 		rightHelpPanel = new JPanel();

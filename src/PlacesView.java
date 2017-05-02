@@ -35,7 +35,7 @@ public class PlacesView extends JFrame{
 	public PlacesView(DefaultListModel<String> lm){
 		this.setTitle("Restaurants");
 		//used for filling the scroll pane for testing
-		placesModel = new DefaultListModel<>();
+		placesModel = lm;
 		placesList = new JList<String>(placesModel);
 		backBtnPanel = new JPanel();
 		placesPanel = new JPanel();

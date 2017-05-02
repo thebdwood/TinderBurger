@@ -63,8 +63,9 @@ public class MainView extends JFrame implements ActionListener
 	private JButton remaining;
 
 	
-	public Color mainFrameBackground = Color.decode("#7FDBFF");
-	public Color mainButtonBackground = Color.decode("#001f3f");
+	public Color mainFrameBackground = Color.decode("#7FDBFF"); //sky blue
+	public Color mainFrameBackgroundColor = Color.decode("#95cde2"); //darker sky blue
+	public Color mainButtonBackground = Color.decode("#001f3f"); //navy blue
 
 	private DefaultListModel<String> foodTypes;
 	private JScrollPane foodsPane;
@@ -94,7 +95,8 @@ public class MainView extends JFrame implements ActionListener
 		yesList.setForeground(mainButtonBackground);
 
 		yesList = new JScrollPane(new JList<String>(yesListModel));
-
+		yesList.setBackground(mainFrameBackground);
+		yesList.setForeground(mainButtonBackground);
 		
 		yesButton = new JButton(YES_LIST_TITLE);
 		maybeButton = new JButton(MAYBE_LIST_TITLE);
@@ -155,7 +157,8 @@ public class MainView extends JFrame implements ActionListener
         //TODO: temp colors. Delete when done
 
         leftHelpPanel.setBackground(mainFrameBackground);
-        displayPanel.setBackground(mainFrameBackground);
+        displayPanel.setBackground(mainFrameBackgroundColor);
+        //TODO change color above
 
         //leftHelpPanel.setBackground(Color.BLUE);
         

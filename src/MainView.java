@@ -19,9 +19,6 @@ import javax.swing.border.TitledBorder;
  */
 public class MainView extends JFrame
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Constant to change the title of the no list
@@ -62,19 +59,27 @@ public class MainView extends JFrame
 	private JButton remaining;
 	
 	public Color mainFrameBackground = Color.decode("#7FDBFF");
+	public Color mainButtonBackground = Color.decode("#001f3f");
 	/**
 	 * Constructor for MainView. Initializes the JScrollPanes and the DefaultListModels
 	 */
 	public MainView()
 	{	
+		
 		noListModel = new DefaultListModel<>();
 		noList = new JScrollPane(new JList<Restaurant>(noListModel));
+		noList.setBackground(mainFrameBackground);
+		noList.setForeground(mainButtonBackground);
 		
 		maybeListModel = new DefaultListModel<>();
 		maybeList = new JScrollPane(new JList<Restaurant>(maybeListModel));
+		maybeList.setBackground(mainFrameBackground);
+		maybeList.setForeground(mainButtonBackground);
 		
 		yesListModel = new DefaultListModel<>();
 		yesList = new JScrollPane(new JList<Restaurant>(yesListModel));
+		yesList.setBackground(mainFrameBackground);
+		yesList.setForeground(mainButtonBackground);
 		
 		yesButton = new JButton(YES_LIST_TITLE);
 		maybeButton = new JButton(MAYBE_LIST_TITLE);
@@ -86,8 +91,14 @@ public class MainView extends JFrame
 		helpButton.setIcon(helpBtn); 
 		
 		leftHelpPanel = new JPanel();
+		leftHelpPanel.setBackground(mainFrameBackground);
+		leftHelpPanel.setForeground(mainButtonBackground);
 		rightHelpPanel = new JPanel();
+		rightHelpPanel.setBackground(mainFrameBackground);
+		rightHelpPanel.setForeground(mainButtonBackground);
 		displayPanel = new JPanel();
+		displayPanel.setBackground(mainFrameBackground);
+		displayPanel.setForeground(mainButtonBackground);
 	
 		remaining = new JButton("Remaining: 0");
 	}
@@ -104,6 +115,8 @@ public class MainView extends JFrame
 		setLayout(new GridBagLayout());
 		/*A row for the JFrame*/
 		JPanel rowPanel = new JPanel();
+		rowPanel.setBackground(mainFrameBackground);
+		rowPanel.setForeground(mainButtonBackground);
 		/*GridBag constraints to organize the rows of the frame*/
 		GridBagConstraints rowConstraints = new GridBagConstraints();
 		rowConstraints.insets = new Insets(4, 4, 4, 4);
@@ -118,8 +131,8 @@ public class MainView extends JFrame
         panelConstraints.fill = GridBagConstraints.BOTH;
         panelConstraints.weighty = 1;
         //TODO: temp colors. Delete when done
-        leftHelpPanel.setBackground(Color.BLUE);
-        displayPanel.setBackground(Color.CYAN);
+        leftHelpPanel.setBackground(mainFrameBackground);
+        displayPanel.setBackground(mainFrameBackground);
         /*Set size of button, text, and gives appearance of label*/
         remaining.setFont(new Font("", Font.BOLD, new Double(width * .025).intValue()));
         remaining.setPreferredSize(new Dimension(new Double(width*.05).intValue(),new Double(height*.05).intValue()));
@@ -225,6 +238,8 @@ public class MainView extends JFrame
         /*New row needed*/
         rowPanel = new JPanel();
         /*Set row layout to GridBag*/
+        rowPanel.setBackground(mainFrameBackground);
+		rowPanel.setForeground(mainButtonBackground);
         rowPanel.setLayout(new GridBagLayout());
         /*Constraints to organize last row of buttons*/
         GridBagConstraints c = new GridBagConstraints();
@@ -254,10 +269,10 @@ public class MainView extends JFrame
         c.gridy = rowConstraints.gridy;
         /*Adds the row with the updated constraints*/
         add(rowPanel, c);
-
+        
 		setVisible(true);
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	/**
 	 * Updates noListModel list to display changes

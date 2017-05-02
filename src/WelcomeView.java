@@ -3,10 +3,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -14,9 +16,10 @@ import javax.swing.border.EmptyBorder;
 public class WelcomeView extends JFrame
 {
 	JPanel glass;
-	JButton startButton = new JButton("Click Here Start");
-	public Color welcomeFrameBackground = Color.decode("#B71427");
-	public Color welcomeButtonBackground = Color.decode("#FFFF33");
+	JButton startButton = new JButton("");
+	ImageIcon startBtnImg = new ImageIcon("startButtonImage.png");
+	public Color welcomeFrameBackground = Color.decode("#7FDBFF");
+	public Color welcomeButtonBackground = Color.decode("#001f3f");
 	JLabel welcomeText = new JLabel("<html>Welcome to<br>TinderBurger</html>", SwingConstants.CENTER);
 	private static final long serialVersionUID = 1L;
 
@@ -33,12 +36,12 @@ public class WelcomeView extends JFrame
 		double height = Math.round(screenSize.getHeight());
 		/*JPanel to hold the start button*/
 		JPanel buttons = new JPanel();
-		/*Sets the startButton's size to the width of the frame and 20 percent of the height of the frame*/
-		startButton.setPreferredSize(new Dimension((int) width, (int) (height * .20)));
-		/*
-		 * Broken code. Can't get the button color to change.
+		startButton.setIcon(startBtnImg);
+		startButton.setBackground(welcomeFrameBackground);
 		startButton.setOpaque(true);
-		startButton.setBackground(welcomeButtonBackground);
+		startButton.setBorderPainted(false);
+		/*Sets the startButton's size to the width of the frame and 40 percent of the height of the frame*/
+		startButton.setPreferredSize(new Dimension((int) width, (int) (height * .40)));
 		
 
 		/*Sets entire screen background to welcomeFrameBackground red*/
@@ -54,7 +57,7 @@ public class WelcomeView extends JFrame
 		/*Moves the JPanel to the bottom*/
 		add(buttons, BorderLayout.SOUTH);
 		/*Set the font and size of loading string*/
-		welcomeText.setFont(new Font("Serif", Font.BOLD, 45));
+		welcomeText.setFont(new Font("Serif", Font.BOLD, 60));
 		/*Aligns the loading string to center of page*/
 		welcomeText.setHorizontalAlignment(JLabel.CENTER);
 		/*Sets the text color to yellow*/

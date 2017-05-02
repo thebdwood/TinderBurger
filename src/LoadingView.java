@@ -21,13 +21,13 @@ import javax.swing.border.EmptyBorder;
 
 public class LoadingView extends JFrame
 {
-	JButton loadButton = new JButton("Click here to cancel");
+	JButton loadButton = new JButton("");
 	ImageIcon loadingGif = getLoadingGif();
-	//ImageIcon loadingGif = new ImageIcon("loading.gif");
+	ImageIcon loadingBtnImg = new ImageIcon("cancelButton.png");
 	JLabel loadingText = new JLabel("Loading . . .");
 	private int loadingWidth = 200;
 	private int loadingHeight = 200;
-	public Color loadFrameBackground = Color.decode("#FDF3E7");
+	public Color loadFrameBackground = Color.decode("#7FDBFF");
 	private static final long serialVersionUID = 1L;
 
 	public LoadingView()
@@ -43,11 +43,15 @@ public class LoadingView extends JFrame
 		double height = Math.round(screenSize.getHeight()/2);
 		/*JPanel to hold the load button*/
 		JPanel buttons = new JPanel();
+		loadButton.setIcon(loadingBtnImg);
 		/*Sets the loadButton's size to the width of the frame and 20 percent of the height of the frame*/
-		loadButton.setPreferredSize(new Dimension((int) width, (int) (height * .20)));
+		loadButton.setPreferredSize(new Dimension((int) width, (int) (height * .2)));
+		loadButton.setBackground(loadFrameBackground);
+		loadButton.setOpaque(true);
+		loadButton.setBorderPainted(false);
 		/*Add to panel*/
 		buttons.add(loadButton);
-		/*Set the size of the frame to the screen size*/
+		/*Set the size of the gif frame to the screen size*/
 		setSize((int) width, (int) height);
 		/*Creates a layout of row 1 and 0 columns for the startButton*/
 		buttons.setLayout(new GridLayout(1, 0));
@@ -58,7 +62,7 @@ public class LoadingView extends JFrame
 		/*Moves the JPanel to the bottom*/
 		add(buttons, BorderLayout.SOUTH);
 		/*Set the font and size of loading string*/
-		loadingText.setFont(new Font("Serif", Font.BOLD, 32));
+		loadingText.setFont(new Font("Serif", Font.BOLD, 55));
 		/*Aligns the loading string to center of page*/
 		loadingText.setHorizontalAlignment(JLabel.CENTER);
 		/*Move the JLabel to the top*/

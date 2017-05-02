@@ -155,7 +155,7 @@ public class Controller
 		{
 			/*Closes the program*/
 			//System.exit(0);
-			/*THIS IS WHERE A CANCEL LOADING SHOULD CALL APPROPRIATE METHODS */
+			/* THIS IS WHERE A CANCEL LOADING SHOULD CALL APPROPRIATE METHODS */
 			mv.activateView();
 		}
 

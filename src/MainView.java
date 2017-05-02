@@ -5,8 +5,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
@@ -17,7 +20,7 @@ import javax.swing.border.TitledBorder;
  * thebdwood: only graphic and color adjustment. Majority of code contribution from amorr.
  *
  */
-public class MainView extends JFrame
+public class MainView extends JFrame implements ActionListener
 {
 	private static final long serialVersionUID = 1L;
 	/**
@@ -39,11 +42,12 @@ public class MainView extends JFrame
 	/*Lists that hold the information to be displayed*/
 	private DefaultListModel<Restaurant> noListModel;
 	private DefaultListModel<Restaurant> maybeListModel;
-	private DefaultListModel<Restaurant> yesListModel;
+	private DefaultListModel<String> yesListModel;
 	/*JScroll panes that display the relative list*/
 	private JScrollPane noList;
 	private JScrollPane maybeList;
 	private JScrollPane yesList;
+	private Model model;
 	/*User options*/
 	private JButton yesButton;
 	private JButton noButton;
@@ -57,9 +61,16 @@ public class MainView extends JFrame
 	private JPanel displayPanel;
 	private JPanel rightHelpPanel;
 	private JButton remaining;
+
 	
 	public Color mainFrameBackground = Color.decode("#7FDBFF");
 	public Color mainButtonBackground = Color.decode("#001f3f");
+
+	private DefaultListModel<String> foodTypes;
+	private JScrollPane foodsPane;
+	private JLabel food;
+	private double width;
+
 	/**
 	 * Constructor for MainView. Initializes the JScrollPanes and the DefaultListModels
 	 */
@@ -77,9 +88,13 @@ public class MainView extends JFrame
 		maybeList.setForeground(mainButtonBackground);
 		
 		yesListModel = new DefaultListModel<>();
-		yesList = new JScrollPane(new JList<Restaurant>(yesListModel));
+
+		yesList = new JScrollPane(new JList<String>(yesListModel));
 		yesList.setBackground(mainFrameBackground);
 		yesList.setForeground(mainButtonBackground);
+
+		yesList = new JScrollPane(new JList<String>(yesListModel));
+
 		
 		yesButton = new JButton(YES_LIST_TITLE);
 		maybeButton = new JButton(MAYBE_LIST_TITLE);
@@ -101,6 +116,13 @@ public class MainView extends JFrame
 		displayPanel.setForeground(mainButtonBackground);
 	
 		remaining = new JButton("Remaining: 0");
+		
+		foodTypes = new DefaultListModel<>();
+		foodsPane = new JScrollPane(new JList<String>(foodTypes));
+		
+		food = new JLabel("", SwingConstants.CENTER);
+		
+		
 	}
 	/**
 	 * Builds the view when called
@@ -109,7 +131,7 @@ public class MainView extends JFrame
 	{
 		/*Gets the Dimensions of the screen*/
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		double width = Math.round(screenSize.getWidth());
+		width = Math.round(screenSize.getWidth());
 		double height = Math.round(screenSize.getHeight());
 		setSize((int) width, (int) height);
 		setLayout(new GridBagLayout());
@@ -131,8 +153,13 @@ public class MainView extends JFrame
         panelConstraints.fill = GridBagConstraints.BOTH;
         panelConstraints.weighty = 1;
         //TODO: temp colors. Delete when done
+
         leftHelpPanel.setBackground(mainFrameBackground);
         displayPanel.setBackground(mainFrameBackground);
+
+        leftHelpPanel.setBackground(Color.BLUE);
+        
+
         /*Set size of button, text, and gives appearance of label*/
         remaining.setFont(new Font("", Font.BOLD, new Double(width * .025).intValue()));
         remaining.setPreferredSize(new Dimension(new Double(width*.05).intValue(),new Double(height*.05).intValue()));
@@ -149,8 +176,36 @@ public class MainView extends JFrame
         counterConstraint.fill = GridBagConstraints.HORIZONTAL;
         /*Adds remaining to panel*/
         rightHelpPanel.add(remaining, counterConstraint);
+        
+        TitledBorder optionsListBorder = new TitledBorder(new LineBorder(Color.BLACK, 1));
+		optionsListBorder.setTitle("Remaining Options");
+		optionsListBorder.setTitleFont(new Font("Remaining Options", Font.BOLD, FONT_LIST_TITLE_SIZES));
+		optionsListBorder.setTitleJustification(TitledBorder.CENTER);
+		
+		foodsPane.setBorder(optionsListBorder);
+		
+		int oldx  = counterConstraint.gridx;
+        oldx++;
+        counterConstraint = new GridBagConstraints();
+        counterConstraint.gridy = -1;
+        counterConstraint.gridx = oldx;
+        counterConstraint.weighty = 1;
+        counterConstraint.weightx = 1;
+        counterConstraint.fill = GridBagConstraints.BOTH;
+        rightHelpPanel.add(foodsPane, counterConstraint);
+        
+        GridBagConstraints c = new GridBagConstraints();
+        c.weightx = 1;
+        c.weighty = 1;
+        c.fill = GridBagConstraints.BOTH;
+        displayPanel.setLayout(new GridBagLayout());
+       
+        food.setFont(new Font("", Font.BOLD, new Double (width * .025).intValue())); 
+        displayPanel.add(food, c);
+        
         /*Creates a GridBagLayout for the first row panel*/
         rowPanel.setLayout(new GridBagLayout());
+        
         /*Adds the panels for choices and help info*/
         rowPanel.add(leftHelpPanel, panelConstraints);
         rowPanel.add(displayPanel, panelConstraints);
@@ -242,7 +297,7 @@ public class MainView extends JFrame
 		rowPanel.setForeground(mainButtonBackground);
         rowPanel.setLayout(new GridBagLayout());
         /*Constraints to organize last row of buttons*/
-        GridBagConstraints c = new GridBagConstraints();
+        c = new GridBagConstraints();
         c.anchor = GridBagConstraints.SOUTHWEST;
         c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 1;
@@ -285,6 +340,25 @@ public class MainView extends JFrame
 		{
 			noListModel.addElement(r);
 		}
+	}
+	
+	private void updateRightList()
+	{
+		if (yesListModel.isEmpty())
+		{
+			
+		}
+		else
+		{
+			yesListModel.clear();
+		}
+
+		for (int i = 0; i < model.getYesList().size(); ++i)
+		{
+			yesListModel.addElement(model.getYesList().get(i).toString());
+		}
+		
+		//remove and update
 	}
 
 	/**
@@ -335,4 +409,39 @@ public class MainView extends JFrame
 	{
 		helpButton.addActionListener(l);
 	}
+	
+	public void setFoodTypes(DefaultListModel<Ethnicities> foods)
+	{
+      for (int i = 0; i < foods.size(); ++i)
+      {
+    	foodTypes.addElement(foods.getElementAt(i).toString());
+      }
+     
+      food.setText(foods.get(0).toString());
+	}
+	
+	public Ethnicities getCurrentEthnicity()
+	{
+		for (Ethnicities e : Ethnicities.values())
+		{
+			if (e.toString().equalsIgnoreCase(food.getText()))
+			{
+				return e;
+			}
+		}
+		
+		return null;
+	}
+	
+	public void setModel(Model m)
+	{
+		model = m;
+		model.addListener(this);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		updateRightList();
+	}
+	
 }

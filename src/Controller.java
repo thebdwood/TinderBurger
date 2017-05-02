@@ -8,17 +8,26 @@ public class Controller
 	private WelcomeView wv = new WelcomeView();
 	private LoadingView lv = new LoadingView();
 	private MainView mv = new MainView();
-
+	private Model model;
+	
 	public Controller()
 	{
-	
+		
 	}
 	
 	public void setMainView(MainView mv)
 	{
 		this.mv = mv;
 		mv.addFoodButtonListener(new FoodButtonListener());
+		mv.addYesButtonListener(new YesButtonListener());
 		
+		
+	}
+	
+	public void setModel(Model m)
+	{
+		model = m;
+		//model.addListener(mv);
 	}
 	
 	public void setWelcomeView(WelcomeView view)
@@ -39,10 +48,13 @@ public class Controller
 		public void actionPerformed(ActionEvent arg0) 
 		{
 			/*Closes the window*/
+			mv.setFoodTypes(model.getChoices());
 			mv.activateView();
+			
 			wv.dispose();
 		}
 	}
+	
 	
 	private class FoodButtonListener implements ActionListener
 	{
@@ -188,5 +200,18 @@ public class Controller
 		{
 			//Left empty 
 		}
+	}
+	
+	private class YesButtonListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			// TODO Auto-generated method stub
+			
+			model.addToYesList(mv.getCurrentEthnicity());
+		}
+		
 	}
 }

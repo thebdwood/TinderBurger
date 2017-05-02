@@ -10,12 +10,16 @@ public class Model
 {
 	private DefaultListModel<Ethnicities> choices;
 	private DefaultListModel<Ethnicities> yesList;
+	private DefaultListModel<Ethnicities> noList;
+	private DefaultListModel<Ethnicities> maybeList;
 	private ArrayList<ActionListener> listeners;
 	
 	public Model()
 	{
 		choices = new DefaultListModel<>();
 		yesList = new DefaultListModel<>();
+		noList = new DefaultListModel<>();
+		maybeList = new DefaultListModel<>();
 		listeners = new ArrayList<>();
 	}
 	
@@ -47,6 +51,18 @@ public class Model
 		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Add to yeslist"));
 	}
 	
+	public void addToNoList(Ethnicities e)
+	{
+		noList.addElement(e);
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Add to nolist"));
+	}
+	
+	public void addToMaybeList(Ethnicities e)
+	{
+		maybeList.addElement(e);
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Add to maybelist"));
+	}
+	
 	public void addListener(ActionListener l) 
 	{
 		listeners.add(l);
@@ -63,5 +79,15 @@ public class Model
 	public DefaultListModel<Ethnicities> getYesList()
 	{
 		return yesList;
+	}
+	
+	public DefaultListModel<Ethnicities> getNoList()
+	{
+		return noList;
+	}
+	
+	public DefaultListModel<Ethnicities> getMaybeList()
+	{
+		return maybeList;
 	}
 }

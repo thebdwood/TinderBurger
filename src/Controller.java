@@ -22,6 +22,8 @@ public class Controller
 		this.mv = mv;
 		mv.addFoodButtonListener(new FoodButtonListener());
 		mv.addYesButtonListener(new YesButtonListener());
+		mv.addNoButtonListener(new NoButtonListener());
+		mv.addMaybeButtonListener(new MaybeButtonListener());
 		
 		
 	}
@@ -225,6 +227,32 @@ public class Controller
 			// TODO Auto-generated method stub
 			
 			model.addToYesList(mv.getCurrentEthnicity());
+		}
+		
+	}
+	
+	private class NoButtonListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			// TODO Auto-generated method stub
+			
+			model.addToNoList(mv.getCurrentEthnicity());
+		}
+		
+	}
+	
+	private class MaybeButtonListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			// TODO Auto-generated method stub
+			
+			model.addToMaybeList(mv.getCurrentEthnicity());
 		}
 		
 	}

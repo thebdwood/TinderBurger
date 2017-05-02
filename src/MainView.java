@@ -40,8 +40,8 @@ public class MainView extends JFrame implements ActionListener
 	 */
 	final int FONT_LIST_TITLE_SIZES = 25;
 	/*Lists that hold the information to be displayed*/
-	private DefaultListModel<Restaurant> noListModel;
-	private DefaultListModel<Restaurant> maybeListModel;
+	private DefaultListModel<String> noListModel;
+	private DefaultListModel<String> maybeListModel;
 	private DefaultListModel<String> yesListModel;
 	/*JScroll panes that display the relative list*/
 	private JScrollPane noList;
@@ -78,12 +78,12 @@ public class MainView extends JFrame implements ActionListener
 	{	
 		
 		noListModel = new DefaultListModel<>();
-		noList = new JScrollPane(new JList<Restaurant>(noListModel));
+		noList = new JScrollPane(new JList<String>(noListModel));
 		noList.setBackground(mainFrameBackground);
 		noList.setForeground(mainButtonBackground);
 		
 		maybeListModel = new DefaultListModel<>();
-		maybeList = new JScrollPane(new JList<Restaurant>(maybeListModel));
+		maybeList = new JScrollPane(new JList<String>(maybeListModel));
 		maybeList.setBackground(mainFrameBackground);
 		maybeList.setForeground(mainButtonBackground);
 		
@@ -157,7 +157,7 @@ public class MainView extends JFrame implements ActionListener
         leftHelpPanel.setBackground(mainFrameBackground);
         displayPanel.setBackground(mainFrameBackground);
 
-        leftHelpPanel.setBackground(Color.BLUE);
+        //leftHelpPanel.setBackground(Color.BLUE);
         
 
         /*Set size of button, text, and gives appearance of label*/
@@ -333,13 +333,55 @@ public class MainView extends JFrame implements ActionListener
 	 * Updates noListModel list to display changes
 	 * @param list
 	 */
-	private void editLeftList(ArrayList<Restaurant> list)
+	private void updateLeftList()
 	{
-		noListModel.clear();
-		for (Restaurant r : list)
+		
+		
+		if (noListModel.isEmpty())
 		{
-			noListModel.addElement(r);
+			
 		}
+		else
+		{
+			noListModel.clear();
+		}
+
+		for (int i = 0; i < model.getNoList().size(); ++i)
+		{
+			noListModel.addElement(model.getNoList().get(i).toString());
+		}
+		
+		//remove and update
+		
+		
+		
+			
+	}
+	
+	private void updateMaybeList()
+	{
+		
+		
+		if (maybeListModel.isEmpty())
+		{
+			
+		}
+		else
+		{
+			maybeListModel.clear();
+		}
+
+		for (int i = 0; i < model.getMaybeList().size(); ++i)
+		{
+			maybeListModel.addElement(model.getMaybeList().get(i).toString());
+		}
+		
+		//remove and update
+		
+		
+		
+		
+		
 	}
 	
 	private void updateRightList()
@@ -359,6 +401,7 @@ public class MainView extends JFrame implements ActionListener
 		}
 		
 		//remove and update
+		
 	}
 
 	/**
@@ -416,6 +459,10 @@ public class MainView extends JFrame implements ActionListener
       {
     	foodTypes.addElement(foods.getElementAt(i).toString());
       }
+      
+      remaining.setText("Remaing: " + foodTypes.getSize());
+      
+      foodTypes.remove(0);
      
       food.setText(foods.get(0).toString());
 	}
@@ -441,7 +488,33 @@ public class MainView extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		updateRightList();
+		
+		if (foodTypes.isEmpty())
+		{
+			food.setText("All Choices used");
+			remaining.setText("Remaing: " + foodTypes.getSize());
+			return;
+		}
+		
+		String temp = foodTypes.remove(0);
+		remaining.setText("Remaing: " + foodTypes.getSize());
+		food.setText(temp);
+		
+		if (!model.getYesList().isEmpty())
+		{
+			updateRightList();
+		}
+		
+		if (!model.getNoList().isEmpty())
+		{
+			updateLeftList();
+		}
+		
+		if (!model.getMaybeList().isEmpty())
+		{
+			updateMaybeList();
+		}
+		
 	}
 	
 }

@@ -99,7 +99,7 @@ public class PlacesView extends JFrame{
 			placesModel.addElement(i + ": TSESSADSsdghdfgfgkghjl");
 		}
 
-		setSize((int) width/2, (int) height/2);
+		setSize((int) width, (int) height);
 		add(backBtnPanel);
 		add(placesPanel);
 		setVisible(true);

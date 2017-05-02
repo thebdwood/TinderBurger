@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -74,7 +75,7 @@ public class LoadingView extends JFrame
 		add(new JLabel(loadingGif, JLabel.CENTER));
 		setLocationRelativeTo(null);
 		setVisible(true);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);	
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
 	public void addLoadButtonListener(ActionListener l)

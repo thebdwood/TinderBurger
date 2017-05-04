@@ -2,6 +2,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+
+import javax.swing.DefaultListModel;
 
 public class Controller 
 {
@@ -77,6 +82,20 @@ public class Controller
 			            @Override
 			            public void run() {
 			                mv.setVisible(false);
+			                Enumeration<Ethnicities> yesses = model.getYesList().elements();
+			                List<Ethnicities> yesList = new ArrayList<>(model.getYesList().size());
+			                while (yesses.hasMoreElements()){
+			                	yesList.add(yesses.nextElement());
+			                }
+			                String[] yesQuery = new String[yesList.size()];
+			                for (int i = 0; i < yesList.size(); ++i){
+			                	yesQuery[i] = yesList.get(i).toString();
+			                }
+			                Locator l = new Locator(yesQuery);
+			                for (Restaurant r : l.getResults().values()){
+			                	model.addToResultsList(r.toString());
+			                }
+			                pv.setListModel(model.getResults());
 			            	pv.activatePlacesView();
 			            	lv.dispose();
 			            }

@@ -12,6 +12,7 @@ public class Model
 	private DefaultListModel<Ethnicities> yesList;
 	private DefaultListModel<Ethnicities> noList;
 	private DefaultListModel<Ethnicities> maybeList;
+	private DefaultListModel<String> results;
 	private ArrayList<ActionListener> listeners;
 	
 	public Model()
@@ -20,6 +21,7 @@ public class Model
 		yesList = new DefaultListModel<>();
 		noList = new DefaultListModel<>();
 		maybeList = new DefaultListModel<>();
+		results = new DefaultListModel<>();
 		listeners = new ArrayList<>();
 	}
 	
@@ -89,5 +91,17 @@ public class Model
 	public DefaultListModel<Ethnicities> getMaybeList()
 	{
 		return maybeList;
+	}
+	
+	public void setResultsList(DefaultListModel<String> lm){
+		this.results = lm;
+	}
+	
+	public void addToResultsList(String string){
+		this.results.addElement(string);
+	}
+	
+	public DefaultListModel<String> getResults(){
+		return this.results;
 	}
 }

@@ -37,13 +37,14 @@ public class PlacesView extends JFrame{
 		//used for filling the scroll pane for testing
 		placesModel = lm;
 		placesList = new JList<String>(placesModel);
-		backBtnPanel = new JPanel();
-		placesPanel = new JPanel();
+		//backBtnPanel = new JPanel();
+		//placesPanel = new JPanel();
 		backBtn = new JButton("Back");
 	}
 	
-	public void setListModel(DefaultListModel<String> lm){
-		this.placesModel = lm;
+	public void setListModel(DefaultListModel<String> defaultListModel){
+		this.placesModel = defaultListModel;
+		placesList = new JList<String>(placesModel);
 	}
 
 	public void activatePlacesView(){
@@ -94,14 +95,14 @@ public class PlacesView extends JFrame{
 		add(placesPane, gbc);
 		
 		//used for filling the scroll pane for testing
-		int i = 0;
-		while (++i < 20){
-			placesModel.addElement(i + ": Qudoba is great fam");
-		}
+//		int i = 0;
+//		while (++i < 20){
+//			placesModel.addElement(i + ": Qdoba is great fam");
+//		}
 
 		setSize((int) width, (int) height);
-		add(backBtnPanel);
-		add(placesPanel);
+		//add(backBtnPanel);
+		//add(placesPanel);
 		setVisible(true);
 	}
 	

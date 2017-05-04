@@ -81,7 +81,7 @@ public class Controller
 			        new java.util.TimerTask() {
 			            @Override
 			            public void run() {
-			                mv.setVisible(false);
+			                
 			                Enumeration<Ethnicities> yesses = model.getYesList().elements();
 			                List<Ethnicities> yesList = new ArrayList<>(model.getYesList().size());
 			                while (yesses.hasMoreElements()){
@@ -93,10 +93,11 @@ public class Controller
 			                }
 			                Locator l = new Locator(yesQuery);
 			                for (Restaurant r : l.getResults().values()){
-			                	model.addToResultsList(r.toString());
+			                	model.addToResultsList(r.toString() + " is a 100% match to your criteria.");
 			                }
 			                pv.setListModel(model.getResults());
 			            	pv.activatePlacesView();
+			            	mv.setVisible(false);
 			            	lv.dispose();
 			            }
 			        }, 

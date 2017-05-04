@@ -66,6 +66,7 @@ public class Restaurant
 	/**
 	 * Returns the name of the Restaurant
 	 */
+	@Override
 	public String toString(){
 		return this.name;
 	}

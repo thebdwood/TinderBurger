@@ -83,6 +83,75 @@ public class Locator {
 			}
 		}
 	}
+	
+	/**
+	 * Constructor for a Locator with a variable number of String args.
+	 * These args should be the keywords to search locations for.
+	 * They may also be passed as an array of Strings.
+	 * For example, one might search for "burgers" and "tacos"
+	 * @param args
+	 */
+	public Locator(Ethnicities... args){
+		this(args,new Ethnicities[] {});
+	}
+
+	/**
+	 * Constructor for a Locator taking two String arrays: yes and no,
+	 * which should represent the types of food corresponding to those selections.
+	 * These args should be the keywords used for searching locations.
+	 * For example, the "yes" array might be {"burgers", "tacos"}
+	 * while the "no" array might be {"noodles"}
+	 * @param yes	String array of food type keywords
+	 * @param no	String array of food type keywords
+	 */
+	public Locator(Ethnicities[] yes, Ethnicities[] no){
+		this(yes, new Ethnicities[]{}, no);
+	}
+
+	/**
+	 * Constructor for a Locator taking three String arrays: yes, maybe and no,
+	 * which should represent the types of food corresponding to those selections.
+	 * These args should be the keywords used for searching locations.
+	 * For example, the "yes" array might be {"burgers", "tacos"}
+	 * while the "no" array might be {"noodles"}
+	 * @param yes	String array of food type keywords
+	 * @param maybe	String array of food type keywords
+	 * @param no	String array of food type keywords
+	 */
+	public Locator(Ethnicities[] yes, Ethnicities[] maybe, Ethnicities[] no){
+		for(Ethnicities arg : yes){
+			String keyword = arg.toString();
+			places = client.getNearbyPlaces(35.2124253,-97.4219124, 6000, GooglePlaces.MAXIMUM_RESULTS,  Param.name("keyword").value(keyword));
+			
+			for (int i = 0; i < (places.size()/3) + 1; ++i){
+				if (!placesMap.containsKey(places.get(i).getName())){
+					placesMap.put(places.get(i).getName(), new Restaurant(places.get(i)));
+					placesMap.get(places.get(i).getName()).addKeyword(keyword);
+				}
+			}
+		
+		}
+		
+		for (Ethnicities arg: maybe){
+			String keyword = arg.toString();
+			places = client.getNearbyPlaces(35.2124253,-97.4219124, 6000, GooglePlaces.MAXIMUM_RESULTS,  Param.name("keyword").value(keyword));
+			for (int i = 0; i < (places.size()/3) + 1; ++i){
+				if (!placesMap.containsKey(places.get(i).getName())){
+					placesMap.put(places.get(i).getName(), new Restaurant(places.get(i)));
+					placesMap.get(places.get(i).getName()).addKeyword(keyword);
+				}
+			}
+		}
+		
+		for (Ethnicities arg: no){
+			String keyword = arg.toString();
+			places = client.getNearbyPlaces(35.2124253,-97.4219124, 6000, GooglePlaces.MAXIMUM_RESULTS,  Param.name("keyword").value(keyword));
+			for (Place place : places){
+				if (placesMap.containsKey(place.getName()))
+					placesMap.remove(place.getName());
+			}
+		}
+	}
 
 	public Map<String, Restaurant> getResults(){
 		return placesMap;
